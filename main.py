@@ -67,6 +67,7 @@ def load_from_file():
                 "price": float(price)
             }
             shopping_list.append(item)
+    print("✅Load file")
     return shopping_list
         
 
@@ -87,33 +88,39 @@ def main():
             ''')
         try:
             choice = int(input("Ваш вибір: "))
-
-            # if choice == 1:
-            #     pass
-            # elif choice == 2:
-            #     pass
-            match choice:
-                case 1:
-                    try:
-                        add_item(shopping_list)
-                    except:
-                        print("Error!")
-                case 2:
-                    show_list(shopping_list)
-                case 3:
-                    count_total(shopping_list)
-                case 4:
-                    save_to_file(shopping_list)
-                case 5:
-                    load_from_file()
-                case 6:
-                    print("See you!!")
-                    break
-                case _:
-                    print("Error! Enter number 1-6!")
-                    
         except ValueError:
             print("Enter number 1-6!!")
+            continue
+
+        # if choice == 1:
+        #     pass
+        # elif choice == 2:
+        #     pass
+        match choice:
+            case 1:
+                try:
+                    add_item(shopping_list)
+                # except:
+                #     print("Error!")
+                except Exception as e:
+                    print(f"Your error: {e}")
+            case 2:
+                show_list(shopping_list)
+            case 3:
+                count_total(shopping_list)
+            case 4:
+                save_to_file(shopping_list)
+            case 5:
+                try:
+                    shopping_list = load_from_file()
+                except FileNotFoundError:
+                    print("File Not Found Error")
+            case 6:
+                print("See you!!")
+                break
+            case _:
+                print("Error! Enter number 1-6!")
+                    
 
 
 if __name__ == "__main__":
